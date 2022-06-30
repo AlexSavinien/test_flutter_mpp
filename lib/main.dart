@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:mpp_test/screens/product_detail_screen.dart';
-import 'package:mpp_test/widgets/products_list.dart';
 import 'screens/main_screen.dart';
 
 void main() {
@@ -16,7 +15,11 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
         title: 'Flutter Demo',
         theme: ThemeData(
-          primarySwatch: Colors.green,
+          colorScheme: ThemeData().colorScheme.copyWith(
+                primary: Color.fromRGBO(11, 59, 45, 1),
+                secondary: Color.fromRGBO(255, 185, 0, 1),
+                background: Colors.white,
+              ),
           fontFamily: 'Philosopher',
         ),
         home: MainScreen(),

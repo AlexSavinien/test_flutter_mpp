@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'package:tab_indicator_styler/tab_indicator_styler.dart';
 import '../models/plant.dart';
 
 class ProductAppBar extends StatelessWidget {
@@ -10,7 +10,7 @@ class ProductAppBar extends StatelessWidget {
 
   final Plant plant;
 
-  List<Tab> myTabs = <Tab>[
+  final List<Tab> myTabs = <Tab>[
     Tab(
       text: 'About',
     ),
@@ -70,6 +70,7 @@ class ProductAppBar extends StatelessWidget {
                               fit: BoxFit.cover,
                             ),
                           ),
+                          SizedBox(height: 5),
                           Text(
                             'Water',
                             style: TextStyle(
@@ -77,10 +78,11 @@ class ProductAppBar extends StatelessWidget {
                               fontSize: 15,
                             ),
                           ),
+                          SizedBox(height: 5),
                           Text(
                             'In ${plant.water} days',
                             style: TextStyle(
-                              color: Colors.black45,
+                              color: Colors.white54,
                               fontSize: 14,
                             ),
                           ),
@@ -105,17 +107,19 @@ class ProductAppBar extends StatelessWidget {
                               fit: BoxFit.cover,
                             ),
                           ),
+                          SizedBox(height: 5),
                           Text(
-                            'Water',
+                            'Fertilizing',
                             style: TextStyle(
                               color: Colors.white,
                               fontSize: 15,
                             ),
                           ),
+                          SizedBox(height: 5),
                           Text(
                             'In ${plant.fertilizing} days',
                             style: TextStyle(
-                              color: Colors.black45,
+                              color: Colors.white54,
                               fontSize: 14,
                             ),
                           ),
@@ -138,22 +142,86 @@ class ProductAppBar extends StatelessWidget {
                         topRight: Radius.circular(15),
                       ),
                     ),
-                    height: 300,
+                    height: 490,
                     child: DefaultTabController(
                       length: 3,
                       child: Scaffold(
+                        floatingActionButton: Container(
+                          padding: EdgeInsets.symmetric(horizontal: 10),
+                          width: double.infinity,
+                          child: FloatingActionButton(
+                            onPressed: () {},
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(15.0),
+                              ),
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Text(
+                                'Change Schedule',
+                                style: TextStyle(
+                                  fontSize: 30,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                        floatingActionButtonLocation:
+                            FloatingActionButtonLocation.centerDocked,
+                        backgroundColor: Colors.white,
                         appBar: AppBar(
+                          elevation: 0,
+                          backgroundColor: Colors.white,
+                          toolbarHeight: 0,
                           automaticallyImplyLeading: false,
                           bottom: TabBar(
                             tabs: myTabs,
+                            indicator: DotIndicator(
+                              color: Theme.of(context).colorScheme.secondary,
+                              distanceFromCenter: 16,
+                              radius: 3,
+                              paintingStyle: PaintingStyle.fill,
+                            ),
+                            unselectedLabelColor: Colors.black,
+                            labelColor: Theme.of(context).colorScheme.secondary,
+                            labelStyle: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 16,
+                            ),
                           ),
                         ),
                         body: TabBarView(children: [
                           Tab(
-                            child: Text(plant.description.substring(0, 200)),
+                            child: Padding(
+                              padding: const EdgeInsets.all(15.0),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    'Care',
+                                    style: TextStyle(
+                                      fontSize: 30,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  Divider(),
+                                  Text(
+                                    'Light',
+                                    style: TextStyle(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  SizedBox(height: 10),
+                                  Text(plant.description.substring(0, 200)),
+                                ],
+                              ),
+                            ),
                           ),
                           Tab(
-                            child: Text(plant.description.substring(200, 400)),
+                            child: Text(plant.description.substring(200, 500)),
                           ),
                           Tab(
                             child: Text(plant.description.substring(400)),

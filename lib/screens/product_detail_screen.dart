@@ -16,7 +16,7 @@ class ProductDetailScreen extends StatelessWidget {
           children: [
             Text(
               plant.localization,
-              style: TextStyle(fontSize: 15, color: Colors.black26),
+              style: TextStyle(fontSize: 15, color: Colors.white54),
             ),
             Text(
               plant.title,

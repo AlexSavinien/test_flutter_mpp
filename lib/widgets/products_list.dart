@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:mpp_test/models/plant.dart';
-import 'package:mpp_test/screens/product_detail_screen.dart';
 
 /// List that display all products with specified filtering
 /// Input : List<Plant>
@@ -28,13 +27,14 @@ class ProductsList extends StatelessWidget {
           margin: EdgeInsets.all(10),
           height: 400,
           child: Material(
+            color: Colors.white70,
             elevation: 5,
             borderRadius: BorderRadius.all(
               Radius.circular(radius),
             ),
             child: Container(
               decoration: BoxDecoration(
-                color: Theme.of(context).primaryColor,
+                color: Theme.of(context).colorScheme.primary,
                 borderRadius: BorderRadius.all(
                   Radius.circular(radius),
                 ),
@@ -43,6 +43,7 @@ class ProductsList extends StatelessWidget {
                 children: [
                   Container(
                     decoration: BoxDecoration(
+                      // color: Colors.white70,
                       image: DecorationImage(
                         image: AssetImage('assets/images/plant.png'),
                       ),
@@ -50,6 +51,7 @@ class ProductsList extends StatelessWidget {
                   ),
                   Container(
                     padding: EdgeInsets.all(20),
+                    // color: Colors.white70,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -78,7 +80,7 @@ class ProductsList extends StatelessWidget {
                       height: 100,
                       width: 100,
                       decoration: BoxDecoration(
-                        color: Colors.lightGreen,
+                        color: Color.fromRGBO(105, 147, 112, 1),
                         borderRadius: BorderRadius.only(
                           topLeft: Radius.circular(radius),
                           bottomRight: Radius.circular(radius),

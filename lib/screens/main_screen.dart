@@ -1,7 +1,7 @@
 import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
 import 'package:mpp_test/models/plant.dart';
-
+import 'package:tab_indicator_styler/tab_indicator_styler.dart';
 import '../widgets/products_list.dart';
 
 class MainScreen extends StatefulWidget {
@@ -11,30 +11,30 @@ class MainScreen extends StatefulWidget {
   State<MainScreen> createState() => _MainScreenState();
 }
 
-class _MainScreenState extends State<MainScreen> with TickerProviderStateMixin {
+class _MainScreenState extends State<MainScreen> {
   ///MAIN SCREEN Tabs ->
   ///   {Top} / Outdoor / Indoor
-  late TabController _tabController;
-  void initState() {
-    super.initState();
-    _tabController = TabController(
-      length: _tabs.length,
-      vsync: this,
-      initialIndex: 1,
-    );
-  }
 
-  List<Tab> _tabs = <Tab>[
-    Tab(text: 'Top'),
-    Tab(text: 'Outdoor'),
-    Tab(text: 'Indoor'),
-  ];
-
-  List<String> _textsTabs = [
-    'Top',
-    'Outdoor',
-    'Indoor',
-  ];
+  TabBar get _tabBar => TabBar(
+        tabs: [
+          Tab(text: 'Top'),
+          Tab(text: 'Outdoor'),
+          Tab(text: 'Indoor'),
+        ],
+        labelStyle: TextStyle(
+          fontSize: 18,
+          fontWeight: FontWeight.w500,
+        ),
+        labelColor: Colors.black,
+        splashBorderRadius: BorderRadius.circular(15),
+        indicator: RectangularIndicator(
+          color: Colors.white,
+          bottomLeftRadius: 20,
+          bottomRightRadius: 20,
+          topLeftRadius: 20,
+          topRightRadius: 20,
+        ),
+      );
 
   /// DUMMY DATA
   List<Plant> _plants = [
@@ -70,44 +70,84 @@ class _MainScreenState extends State<MainScreen> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              '${DateFormat.MMMd().format(DateTime.now())}',
+    return DefaultTabController(
+      length: 3,
+      child: Scaffold(
+        backgroundColor: Colors.white70,
+        appBar: AppBar(
+          elevation: 0,
+          backgroundColor: Colors.white70,
+          toolbarHeight: 100,
+          title: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                '${DateFormat.MMMd().format(DateTime.now())}',
+                style: TextStyle(
+                  color: Colors.black26,
+                ),
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              Text(
+                'Top Picks',
+                style: TextStyle(
+                  fontSize: 30,
+                  color: Colors.black,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ],
+          ),
+          bottom: PreferredSize(
+            preferredSize: _tabBar.preferredSize,
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Material(
+                borderRadius: BorderRadius.circular(20),
+                color: Colors.grey[400],
+                child: Padding(
+                  padding: const EdgeInsets.all(5.0),
+                  child: _tabBar,
+                ),
+              ),
             ),
-            Text(
-              'Top Picks',
-              style: TextStyle(fontSize: 30),
-            ),
+          ),
+          actionsIconTheme: IconThemeData().copyWith(size: 40),
+          actions: [
+            Container(
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(15),
+              ),
+              margin: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+              child: IconButton(
+                onPressed: () {},
+                icon: Icon(
+                  Icons.apps_rounded,
+                  color: Colors.black,
+                ),
+              ),
+            )
           ],
         ),
-        bottom: TabBar(
-          tabs: _tabs,
-          controller: _tabController,
+        body: Container(
+          color: Colors.white70,
+          child: TabBarView(
+            children: [
+              ProductsList(
+                plants: _plants.where((element) => element.isTop).toList(),
+              ),
+              ProductsList(
+                plants: _plants.where((element) => element.isOutdoor).toList(),
+              ),
+              ProductsList(
+                plants: _plants.where((element) => element.isIndoor).toList(),
+              ),
+            ],
+          ),
         ),
-        actions: [
-          IconButton(
-            onPressed: () {},
-            icon: Icon(Icons.apps_rounded),
-          )
-        ],
-      ),
-      body: TabBarView(
-        controller: _tabController,
-        children: [
-          ProductsList(
-            plants: _plants.where((element) => element.isTop).toList(),
-          ),
-          ProductsList(
-            plants: _plants.where((element) => element.isOutdoor).toList(),
-          ),
-          ProductsList(
-            plants: _plants.where((element) => element.isIndoor).toList(),
-          ),
-        ],
       ),
     );
   }
