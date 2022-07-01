@@ -1,12 +1,18 @@
 import 'package:flutter/material.dart';
 
 import '../models/plant.dart';
-import '../widgets/product_app_bar.dart';
+import '../widgets/product_detail_tab_bar.dart';
+import '../widgets/product_sub_app_bar.dart';
 
 /// The screen is composed of :
-/// - An AppBar on top that contain product's quick infos about usage
-/// - A TabView behind that contain product's detailed infos with a FAB to change schedule
+/// - An AppBar on top that display the product name and allow to navigate back to main screen
+/// - A Body with a Column that contain
+///   - The product (Sub)AppBar (that containt quick info about product and a button to add photo)
+///   - The product Detail Tab Bar that contain :
+///     - A TabBar to select more detailed infos
+///     - TabViews that contain product's detailed infos
 class ProductDetailScreen extends StatelessWidget {
+  static const routeName = '/product-detail';
   const ProductDetailScreen({Key? key}) : super(key: key);
 
   @override
@@ -30,8 +36,13 @@ class ProductDetailScreen extends StatelessWidget {
         elevation: 0,
       ),
 
-      /// ProductAppBar contain the AppBar and his child : the ProductTabBarView
-      body: ProductAppBar(plant: plant),
+      /// Body : The Product SubAppBar and The TabBar
+      body: Column(
+        children: [
+          ProductSubAppBar(plant: plant),
+          ProductDetailTabBar(plant: plant),
+        ],
+      ),
 
       /// Floating Action Button Initialization, Content and Styling
       floatingActionButton: Container(
@@ -40,23 +51,18 @@ class ProductDetailScreen extends StatelessWidget {
         child: FloatingActionButton(
           onPressed: () {},
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(
-              Radius.circular(15.0),
-            ),
+            borderRadius: BorderRadius.all(Radius.circular(15.0)),
           ),
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Text(
-              'Change Schedule',
-              style: TextStyle(
-                fontSize: 25,
-                fontWeight: FontWeight.bold,
-              ),
+          child: Text(
+            'Change Schedule',
+            style: TextStyle(
+              fontSize: 25,
+              fontWeight: FontWeight.bold,
             ),
           ),
         ),
       ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
 }

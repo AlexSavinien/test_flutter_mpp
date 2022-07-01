@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mpp_test/screens/product_detail_screen.dart';
+import 'package:mpp_test/screens/test_screen.dart';
 import 'screens/main_screen.dart';
 
 void main() {
@@ -13,19 +14,21 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        title: 'Flutter Demo',
-        theme: ThemeData(
-          colorScheme: ThemeData().colorScheme.copyWith(
-                primary: Color.fromRGBO(11, 59, 45, 1),
-                secondary: Color.fromRGBO(255, 185, 0, 1),
-                background: Colors.white,
-              ),
-          fontFamily: 'Philosopher',
-        ),
-        home: MainScreen(),
-        initialRoute: '/',
-        routes: {
-          '/product-detail': (context) => ProductDetailScreen(),
-        });
+      title: 'Flutter Demo',
+      theme: ThemeData(
+        colorScheme: ThemeData().colorScheme.copyWith(
+              primary: Color.fromRGBO(11, 59, 45, 1),
+              secondary: Color.fromRGBO(255, 185, 0, 1),
+              background: Colors.white,
+            ),
+        fontFamily: 'Philosopher',
+      ),
+      home: MainScreen(),
+      initialRoute: '/',
+      routes: {
+        ProductDetailScreen.routeName: (context) => ProductDetailScreen(),
+        TestScreen.routeName: (context) => TestScreen()
+      },
+    );
   }
 }

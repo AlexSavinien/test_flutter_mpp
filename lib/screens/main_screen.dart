@@ -1,6 +1,7 @@
 import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
 import 'package:mpp_test/models/plant.dart';
+import 'package:mpp_test/screens/test_screen.dart';
 import 'package:tab_indicator_styler/tab_indicator_styler.dart';
 import '../widgets/products_list.dart';
 
@@ -131,7 +132,9 @@ class _MainScreenState extends State<MainScreen> {
               ),
               margin: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
               child: IconButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.of(context).pushNamed(TestScreen.routeName);
+                },
                 icon: Icon(
                   Icons.apps_rounded,
                   color: Colors.black,
