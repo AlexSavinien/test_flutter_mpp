@@ -4,6 +4,10 @@ import 'package:mpp_test/models/plant.dart';
 import 'package:tab_indicator_styler/tab_indicator_styler.dart';
 import '../widgets/products_list.dart';
 
+/// The MainScreen is composed of :
+/// - An AppBar
+/// - A TabView that handle a filtering actions
+/// - A ListView that expose the filtered products
 class MainScreen extends StatefulWidget {
   const MainScreen({Key? key}) : super(key: key);
 
@@ -74,6 +78,8 @@ class _MainScreenState extends State<MainScreen> {
       length: 3,
       child: Scaffold(
         backgroundColor: Colors.white70,
+
+        /// AppBar
         appBar: AppBar(
           elevation: 0,
           backgroundColor: Colors.white70,
@@ -100,6 +106,8 @@ class _MainScreenState extends State<MainScreen> {
               ),
             ],
           ),
+
+          /// TabBar that handle filtering process
           bottom: PreferredSize(
             preferredSize: _tabBar.preferredSize,
             child: Padding(
@@ -132,6 +140,8 @@ class _MainScreenState extends State<MainScreen> {
             )
           ],
         ),
+
+        /// ProductsList that contain a ListView of filtered products
         body: Container(
           color: Colors.white70,
           child: TabBarView(
