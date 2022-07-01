@@ -25,6 +25,8 @@ class MyApp extends StatelessWidget {
       ),
       home: MainScreen(),
       initialRoute: '/',
+
+      /// {widget}.routeName, la propriété routeName est définie comme static et constante en haut de chaque screen. Pour éviter les fautes de frappes
       routes: {
         ProductDetailScreen.routeName: (context) => ProductDetailScreen(),
         TestScreen.routeName: (context) => TestScreen()
