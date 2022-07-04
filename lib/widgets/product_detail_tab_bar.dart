@@ -67,7 +67,7 @@ class _ProductTabBarState extends State<ProductDetailTabBar>
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 400,
+      height: MediaQuery.of(context).size.height / 2,
       child: Scaffold(
         backgroundColor: Colors.white,
 

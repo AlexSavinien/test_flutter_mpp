@@ -30,7 +30,7 @@ class ProductsList extends StatelessWidget {
         /// General Container with Size and elevation
         child: Container(
           margin: EdgeInsets.all(10),
-          height: 400,
+          height: MediaQuery.of(context).size.height / 2,
           child: Material(
             color: Theme.of(context).colorScheme.primary,
             elevation: 5,
@@ -80,22 +80,24 @@ class ProductsList extends StatelessWidget {
                 Positioned(
                   bottom: 0,
                   right: 0,
-                  child: Container(
-                    height: 100,
-                    width: 100,
-                    decoration: BoxDecoration(
-                      color: Color.fromRGBO(105, 147, 112, 1),
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(radius),
-                        bottomRight: Radius.circular(radius),
+                  child: LayoutBuilder(
+                    builder: (context, constraints) => Container(
+                      height: 100,
+                      width: 100,
+                      decoration: BoxDecoration(
+                        color: Color.fromRGBO(105, 147, 112, 1),
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(radius),
+                          bottomRight: Radius.circular(radius),
+                        ),
                       ),
-                    ),
-                    child: Center(
-                      child: Text(
-                        '${plants[index].price.toStringAsFixed(0)}€',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 20,
+                      child: Center(
+                        child: Text(
+                          '${plants[index].price.toStringAsFixed(0)}€',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 20,
+                          ),
                         ),
                       ),
                     ),
